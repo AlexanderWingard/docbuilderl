@@ -1,0 +1,3 @@
+* Clues
+  $ERL_TOP/lib/erl_docgen/priv/bin/xml_from_edoc.escript does the same thing as
+  docb_gen:module/1
