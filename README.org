@@ -1,3 +1,5 @@
 * Clues
   $ERL_TOP/lib/erl_docgen/priv/bin/xml_from_edoc.escript does the same thing as
   docb_gen:module/1
+
+  Alot of the magic stuff is found in $ERL_TOP/make/otp.mk.in
