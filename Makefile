@@ -1,13 +1,20 @@
 
 ERL_TOP := $(CURDIR)/otp
 TESTROOT := $(CURDIR)/out
+PATH += $(ERL_TOP)/bin:
 
-out/doc/index.html: otp/Makefile
+.PHONY: all clean superclean
+
+all: out/doc/index.html
+
+out/doc/index.html: otp/bin/erl
 	mkdir -p out
 	cp -Rf otp/system .
-# 	For some reason, this only works manually and if I do
-# 	export ERL_TOP again...?
-#	cd system/doc; gmake release_docs
+	cd system/doc; gmake release_docs
+	cd otp/lib/erl_docgen/priv; gmake release_docs
+
+otp/bin/erl: otp/Makefile
+	cd otp; gmake
 
 otp/Makefile: otp/configure
 	cd otp; ./configure
@@ -19,6 +26,9 @@ otp/otp_build:
 	git submodule init
 	git submodule update
 
-clean:
+superclean: clean
+	git submodule update -f
 	cd otp; git clean -fxd
+
+clean:
 	rm -rf out
